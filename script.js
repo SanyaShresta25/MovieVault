@@ -168,7 +168,7 @@ function switchUser(userIndex) {
 
     displayUserProfile();
     displayMovies();
-    updateStats();
+   
 }
 
 function displayUserProfile() {
@@ -215,14 +215,7 @@ function createMovieCard(movie, index) {
     return card;
 }
 
-function updateStats() {
-    const total = movies.length;
-    const avg = total ? (movies.reduce((sum, m) => sum + m.rating, 0) / total).toFixed(1) : "0.0";
 
-    totalMovies.textContent = `Total Movies: ${total}`;
-    avgRating.textContent = `Avg Rating: ${avg}`;
-    favoriteGenre.textContent = `Favorite Genre: ${getMostCommonGenre()}`;
-}
 
 function getMostCommonGenre() {
     const genreCounts = {};
@@ -270,7 +263,7 @@ function addMovie() {
     userMovies[currentUserIndex] = movies;
     saveMoviesToStorage();
     displayMovies();
-    updateStats();
+   
     hideAddMovieForm();
     showMessage(`"${title}" has been added!`);
 }
@@ -281,12 +274,12 @@ function deleteMovie(index) {
         userMovies[currentUserIndex] = movies;
         saveMoviesToStorage();
         displayMovies();
-        updateStats();
+        
     }
 }
 
 function showMessage(msg) {
-    alert(msg); // You can enhance with custom modal if desired.
+    alert(msg);
 }
 
 // Handle Enter key for form
