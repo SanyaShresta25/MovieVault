@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieVault - Your Personal Movie Collection</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="./images/moviefav.jpg">
+</head>
+<body>
+    
+  
+
+    <div class="container">
+        <header class="header">
+            <h1 class="logo">MovieVault</h1>
+            <p class="tagline">Curate your cinematic journey</p>
+        </header>
+
+        <main class="main-content">
+            <section class="user-selector">
+                <h2>Select Profile</h2>
+                <div class="user-profiles">
+                    <div class="user-profile-card" onclick="switchUser(0)">
+                        <div class="user-avatar">SS</div>
+                        <h3>Sanya Shresta</h3>
+                        <p>Film enthusiast and indie movie lover</p>
+                    </div>
+                    <div class="user-profile-card" onclick="switchUser(1)">
+                        <div class="user-avatar">AN</div>
+                        <h3>Aameena Nada</h3>
+                        <p>Sci-fi and action movie collector</p>
+                        
+                    </div>
+                    <div class="user-profile-card" onclick="switchUser(2)">
+                        <div class="user-avatar">SB</div>
+                        <h3>Shawn Bengher</h3>
+                        <p>Classic cinema and drama enthusiast</p>
+                        
+                    </div>
+                </div>
+            </section>
+
+            <section class="profile-section" id="profileSection" style="display: none;">
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="avatar-placeholder">
+                            <span class="avatar-text" id="avatarText">👤</span>
+                        </div>
+                        <div class="profile-info">
+                            <h2 id="userName">Loading...</h2>
+                            <p id="userAge">Age: --</p>
+                            <p id="userLocation">Location: --</p>
+                            <p id="userBio">Bio: --</p>
+                        </div>
+                        <button class="back-btn" onclick="showUserSelector()">← Back to Profiles</button>
+                    </div>
+
+                </div>
+            </section>
+
+            <section class="movies-section" id="moviesSection" style="display: none;">
+                <div class="section-header">
+                    <h3>My Movie Collection</h3>
+                    <button class="add-movie-btn" onclick="showAddMovieForm()">+ Add Movie</button>
+                </div>
+
+                <div class="add-movie-form" id="addMovieForm" style="display: none;">
+                    <h4>Add New Movie</h4>
+                    <div class="form-group">
+                        <input type="text" id="movieTitle" placeholder="Movie Title" required>
+                        <input type="number" id="movieYear" placeholder="Year" min="1900" max="2025" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="movieDirector" placeholder="Director" required>
+                        <select id="movieGenre" required>
+                            <option value="">Select Genre</option>
+                            <option value="Action">Action</option>
+                            <option value="Comedy">Comedy</option>
+                            <option value="Drama">Drama</option>
+                            <option value="Horror">Horror</option>
+                            <option value="Romance">Romance</option>
+                            <option value="Sci-Fi">Sci-Fi</option>
+                            <option value="Fantasy">Fantasy</option>
+                            <option value="Animation">Animation</option>
+                            <option value="Thriller">Thriller</option>
+                            <option value="Documentary">Documentary</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" id="movieRating" placeholder="Rating (1-10)" min="1" max="10" step="0.1" required>
+                        <input type="url" id="movieImage" placeholder="Movie Poster URL (optional)">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" onclick="addMovie()" class="btn-primary">Add Movie</button>
+                        <button type="button" onclick="hideAddMovieForm()" class="btn-secondary">Cancel</button>
+                    </div>
+                </div>
+
+                <div class="movies-grid" id="moviesGrid">
+                    <!-- Movies will be dynamically added here -->
+                </div>
+            </section>
+        </main>
+    </div>
+   
+
+    <script src="script.js"></script>
+</body>
+</html>

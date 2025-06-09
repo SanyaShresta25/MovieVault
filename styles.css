@@ -1,0 +1,526 @@
+/* Dreamy Pink-Purple Color Palette inspired by the image */
+:root {
+    --dreamy-light: #F8E8F5;
+    --dreamy-medium: #E8D0E6;
+    --dreamy-dark: #D4A5D8;
+    --dreamy-accent: #C490C9;
+    --dreamy-deep: #A67BA8;
+    --coral-light: #F5C2A8;
+    --coral-medium: #E8A586;
+    --coral-dark: #D48B6A;
+    --text-dark: #4A3B47;
+    --text-medium: #6B5868;
+    --text-light: #8A7B88;
+    --white: #FFFFFF;
+    --shadow: rgba(196, 144, 201, 0.15);
+    --shadow-strong: rgba(196, 144, 201, 0.25);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Segoe+UI:wght@400;600;700&display=swap');
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, var(--dreamy-light) 0%, var(--dreamy-medium) 50%, var(--coral-light) 100%);
+    color: var(--text-dark);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header Styles */
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 40px 0;
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--dreamy-deep);
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px var(--shadow);
+    letter-spacing: -1px;
+    position: relative;
+}
+
+.tagline {
+    font-size: 1.1rem;
+    color: var(--text-medium);
+    font-style: italic;
+}
+
+/* User Selector Styles */
+.user-selector {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.user-selector h2 {
+    font-size: 2rem;
+    color: var(--text-dark);
+    margin-bottom: 30px;
+}
+
+.user-profiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.user-profile-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 32px var(--shadow);
+    border: 2px solid var(--dreamy-medium);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.user-profile-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px var(--shadow-strong);
+    border-color: var(--dreamy-accent);
+}
+
+.user-avatar {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--dreamy-accent), var(--coral-medium));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--white);
+    margin: 0 auto 20px;
+    box-shadow: 0 4px 16px var(--shadow);
+}
+
+.user-profile-card h3 {
+    font-size: 1.4rem;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+}
+
+.user-profile-card p {
+    color: var(--text-medium);
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+.user-stats {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.stat-item {
+    background: var(--dreamy-light);
+    color: var(--dreamy-deep);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* Back Button */
+.back-btn {
+    background: var(--dreamy-medium);
+    color: var(--text-dark);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-left: auto;
+}
+
+.back-btn:hover {
+    background: var(--dreamy-accent);
+    color: var(--white);
+    transform: translateY(-1px);
+}
+
+/* Profile Section */
+.profile-section {
+    margin-bottom: 40px;
+}
+
+.profile-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 32px var(--shadow);
+    border: 1px solid var(--dreamy-medium);
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.avatar-placeholder {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--dreamy-medium), var(--coral-light));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--dreamy-deep);
+    box-shadow: 0 4px 16px var(--shadow);
+}
+
+.profile-info h2 {
+    font-size: 1.8rem;
+    color: var(--text-dark);
+    margin-bottom: 5px;
+}
+
+.profile-info p {
+    color: var(--text-medium);
+    margin-bottom: 3px;
+}
+
+.profile-stats {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.stat {
+    text-align: center;
+    padding: 15px;
+    background: var(--dreamy-light);
+    border-radius: 12px;
+    min-width: 100px;
+}
+
+.stat-number {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--dreamy-deep);
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--text-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Movies Section */
+.movies-section {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 32px var(--shadow);
+    border: 1px solid var(--dreamy-medium);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.section-header h3 {
+    font-size: 1.5rem;
+    color: var(--text-dark);
+}
+
+.add-movie-btn {
+    background: linear-gradient(135deg, var(--dreamy-accent), var(--coral-medium));
+    color: var(--white);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px var(--shadow);
+}
+
+.add-movie-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--shadow-strong);
+}
+
+/* Add Movie Form */
+.add-movie-form {
+    background: var(--dreamy-light);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 30px;
+    border: 1px solid var(--dreamy-medium);
+}
+
+.add-movie-form h4 {
+    margin-bottom: 20px;
+    color: var(--text-dark);
+}
+
+.form-group {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.form-group input,
+.form-group select {
+    flex: 1;
+    min-width: 200px;
+    padding: 12px 16px;
+    border: 2px solid var(--dreamy-medium);
+    border-radius: 10px;
+    background: var(--white);
+    color: var(--text-dark);
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--dreamy-accent);
+}
+
+.form-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--dreamy-accent), var(--coral-medium));
+    color: var(--white);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary {
+    background: var(--dreamy-medium);
+    color: var(--text-dark);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover,
+.btn-secondary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px var(--shadow);
+}
+
+/* Movies Grid */
+.movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.movie-card {
+    background: var(--white);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 6px 24px var(--shadow);
+    border: 1px solid var(--dreamy-light);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.movie-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 32px var(--shadow-strong);
+}
+
+.movie-poster {
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(135deg, var(--dreamy-light), var(--coral-light));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--dreamy-deep);
+    font-size: 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.movie-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.movie-poster .placeholder {
+    font-size: 2rem;
+    opacity: 0.6;
+}
+
+.movie-info {
+    padding: 20px;
+}
+
+.movie-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+
+.movie-details {
+    color: var(--text-medium);
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+}
+
+.movie-genre {
+    display: inline-block;
+    background: var(--dreamy-light);
+    color: var(--dreamy-deep);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.movie-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.rating-star {
+    color: #FFD700;
+    font-size: 1.1rem;
+}
+
+.rating-number {
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.delete-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    color: #E74C3C;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-btn:hover {
+    background: #E74C3C;
+    color: white;
+    transform: scale(1.1);
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-light);
+}
+
+.empty-state h4 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+.empty-state p {
+    font-size: 1rem;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .logo {
+        font-size: 2.5rem;
+    }
+    
+    .user-profiles {
+        grid-template-columns: 1fr;
+    }
+    
+    .user-profile-card {
+        padding: 25px;
+    }
+    
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .profile-stats {
+        gap: 20px;
+    }
+    
+    .section-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .form-group {
+        flex-direction: column;
+    }
+    
+    .form-group input,
+    .form-group select {
+        min-width: auto;
+    }
+    
+    .movies-grid {
+        grid-template-columns: 1fr;
+    }
+}
