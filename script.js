@@ -1,10 +1,9 @@
-// Multiple User Profiles Array
 const userProfiles = [
     {
         id: 0,
         name: "Sanya Shresta",
         age: 21,
-        location: "Udupi , Karnataka",
+        location: "Udupi, Karnataka",
         bio: "Film enthusiast and indie movie lover",
         avatar: "SC",
         joinDate: "2023",
@@ -14,7 +13,7 @@ const userProfiles = [
         id: 1,
         name: "Aameena Nada",
         age: 20,
-        location: "Ras Al Khaimah , UAE",
+        location: "Ras Al Khaimah, UAE",
         bio: "Sci-fi and action movie collector",
         avatar: "AN",
         joinDate: "2022",
@@ -24,7 +23,7 @@ const userProfiles = [
         id: 2,
         name: "Shawn Bengher",
         age: 22,
-        location: "Bengaluru , Karnataka",
+        location: "Bengaluru, Karnataka",
         bio: "Classic cinema and drama enthusiast",
         avatar: "SB",
         joinDate: "2024",
@@ -32,9 +31,7 @@ const userProfiles = [
     }
 ];
 
-// Movies Arrays for each user
-const userMovies = [
-
+const defaultMovies = [
     [
         {
             title: "Barbie: The Princess and The Popstar",
@@ -61,16 +58,14 @@ const userMovies = [
             image: "https://i.pinimg.com/736x/c4/48/74/c44874bf16763c2187b6a9d89ee3bcbf.jpg"
         }
     ],
-
     [
         {
-                 title: "Barbie and the Diamond Castle",
+            title: "Barbie and the Diamond Castle",
             year: 2008,
             director: "Gino Nichele",
             genre: "Fantasy, Musical",
             rating: 8.1,
             image: "https://i.pinimg.com/736x/7a/50/f7/7a50f70b34963fb3fbcc1bc315dd5983.jpg"
-        
         },
         {
             title: "Bulbbul",
@@ -89,7 +84,6 @@ const userMovies = [
             image: "https://i.pinimg.com/originals/a1/ff/40/a1ff4080c27fcd4066cf6aa876b233b5.gif"
         }
     ],
-
     [
         {
             title: "Pokemon",
@@ -100,8 +94,7 @@ const userMovies = [
             image: "https://i.pinimg.com/originals/e8/f0/fd/e8f0fd891e5edcaf8f338a6c76fd00c4.gif"
         },
         {
-       
-        title: "October",
+            title: "October",
             year: 2018,
             director: "Shoojit Sircar",
             genre: "Romance, Drama",
@@ -117,16 +110,25 @@ const userMovies = [
             image: "https://i.pinimg.com/736x/4f/b6/41/4fb64114361c806843bfa863d063df48.jpg"
         }
     ]
-
 ];
 
+// Utilities to handle LocalStorage
+function saveMoviesToStorage() {
+    localStorage.setItem("userMovies", JSON.stringify(userMovies));
+}
 
-// Current user state
+function loadMoviesFromStorage() {
+    const stored = localStorage.getItem("userMovies");
+    return stored ? JSON.parse(stored) : defaultMovies;
+}
+
+// App state
+let userMovies = loadMoviesFromStorage();
 let currentUserIndex = null;
 let currentUser = null;
 let movies = [];
 
-// DOM Elements
+// DOM elements
 const userSelector = document.querySelector('.user-selector');
 const profileSection = document.getElementById('profileSection');
 const moviesSection = document.getElementById('moviesSection');
@@ -141,12 +143,12 @@ const favoriteGenre = document.getElementById('favoriteGenre');
 const moviesGrid = document.getElementById('moviesGrid');
 const addMovieForm = document.getElementById('addMovieForm');
 
-// Initialize the application
+// Initialize app
 function initializeApp() {
     showUserSelector();
 }
 
-// Show user selector
+// User selector
 function showUserSelector() {
     userSelector.style.display = 'block';
     profileSection.style.display = 'none';
@@ -155,25 +157,21 @@ function showUserSelector() {
     currentUser = null;
 }
 
-// Switch to selected user
 function switchUser(userIndex) {
     currentUserIndex = userIndex;
     currentUser = userProfiles[userIndex];
-    movies = [...userMovies[userIndex]]; // Create a copy of the user's movies
-    
+    movies = [...userMovies[userIndex]];
+
     userSelector.style.display = 'none';
     profileSection.style.display = 'block';
     moviesSection.style.display = 'block';
-    
+
     displayUserProfile();
     displayMovies();
     updateStats();
 }
 
-// Display user profile information
 function displayUserProfile() {
-    if (!currentUser) return;
-    
     userName.textContent = currentUser.name;
     userAge.textContent = `Age: ${currentUser.age}`;
     userLocation.textContent = `Location: ${currentUser.location}`;
@@ -181,193 +179,124 @@ function displayUserProfile() {
     avatarText.textContent = currentUser.avatar;
 }
 
-// Display all movies in the grid
 function displayMovies() {
     if (movies.length === 0) {
-        moviesGrid.innerHTML = `
-            <div class="empty-state">
-                <h4>No movies in your collection yet</h4>
-                <p>Start building your movie vault by adding your first film!</p>
-            </div>
-        `;
+        moviesGrid.innerHTML = `<div class="empty-state"><h4>No movies yet</h4><p>Add one!</p></div>`;
         return;
     }
 
     moviesGrid.innerHTML = '';
-    
     movies.forEach((movie, index) => {
-        const movieCard = createMovieCard(movie, index);
-        moviesGrid.appendChild(movieCard);
+        moviesGrid.appendChild(createMovieCard(movie, index));
     });
 }
 
-// Create a movie card element
 function createMovieCard(movie, index) {
     const card = document.createElement('div');
     card.className = 'movie-card';
-    
-    const posterContent = movie.image 
-        ? `<img src="${movie.image}" alt="${movie.title} poster" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+
+    const posterContent = movie.image
+        ? `<img src="${movie.image}" alt="${movie.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
            <div class="placeholder" style="display:none;">🎬</div>`
         : `<div class="placeholder">🎬</div>`;
-    
+
     card.innerHTML = `
         <div class="movie-poster">
             ${posterContent}
-            <button class="delete-btn" onclick="deleteMovie(${index})" title="Delete movie">×</button>
+            <button class="delete-btn" onclick="deleteMovie(${index})">×</button>
         </div>
         <div class="movie-info">
-            <h4 class="movie-title">${movie.title}</h4>
-            <div class="movie-details">
-                <p>${movie.year} • Directed by ${movie.director}</p>
-            </div>
+            <h4>${movie.title}</h4>
+            <p>${movie.year} • ${movie.director}</p>
             <span class="movie-genre">${movie.genre}</span>
-            <div class="movie-rating">
-                <span class="rating-star">★</span>
-                <span class="rating-number">${movie.rating}</span>
-            </div>
+            <div class="movie-rating">★ ${movie.rating}</div>
         </div>
     `;
-    
     return card;
 }
 
-// Show add movie form
+function updateStats() {
+    const total = movies.length;
+    const avg = total ? (movies.reduce((sum, m) => sum + m.rating, 0) / total).toFixed(1) : "0.0";
+
+    totalMovies.textContent = `Total Movies: ${total}`;
+    avgRating.textContent = `Avg Rating: ${avg}`;
+    favoriteGenre.textContent = `Favorite Genre: ${getMostCommonGenre()}`;
+}
+
+function getMostCommonGenre() {
+    const genreCounts = {};
+    movies.forEach(movie => {
+        movie.genre.split(',').forEach(g => {
+            const trimmed = g.trim();
+            genreCounts[trimmed] = (genreCounts[trimmed] || 0) + 1;
+        });
+    });
+    const sorted = Object.entries(genreCounts).sort((a, b) => b[1] - a[1]);
+    return sorted.length ? sorted[0][0] : "None";
+}
+
 function showAddMovieForm() {
     addMovieForm.style.display = 'block';
     document.getElementById('movieTitle').focus();
 }
 
-// Hide add movie form
 function hideAddMovieForm() {
     addMovieForm.style.display = 'none';
     clearForm();
 }
 
-// Clear form inputs
 function clearForm() {
-    document.getElementById('movieTitle').value = '';
-    document.getElementById('movieYear').value = '';
-    document.getElementById('movieDirector').value = '';
-    document.getElementById('movieGenre').value = '';
-    document.getElementById('movieRating').value = '';
-    document.getElementById('movieImage').value = '';
+    ['movieTitle', 'movieYear', 'movieDirector', 'movieGenre', 'movieRating', 'movieImage'].forEach(id => {
+        document.getElementById(id).value = '';
+    });
 }
 
-// Add new movie
 function addMovie() {
-    if (currentUserIndex === null) {
-        alert('Please select a user first.');
-        return;
-    }
-    
-    // Get form values
     const title = document.getElementById('movieTitle').value.trim();
     const year = parseInt(document.getElementById('movieYear').value);
     const director = document.getElementById('movieDirector').value.trim();
     const genre = document.getElementById('movieGenre').value;
     const rating = parseFloat(document.getElementById('movieRating').value);
     const image = document.getElementById('movieImage').value.trim();
-    
-    // Validate form
-    if (!title || !year || !director || !genre || !rating) {
-        alert('Please fill in all required fields.');
+
+    if (!title || !year || !director || !genre || !rating || rating < 1 || rating > 10 || year < 1900 || year > new Date().getFullYear()) {
+        alert("Please enter valid movie data.");
         return;
     }
-    
-    if (rating < 1 || rating > 10) {
-        alert('Rating must be between 1 and 10.');
-        return;
-    }
-    
-    if (year < 1900 || year > new Date().getFullYear()) {
-        alert('Please enter a valid year.');
-        return;
-    }
-    
-    // Create new movie object
-    const newMovie = {
-        title: title,
-        year: year,
-        director: director,
-        genre: genre,
-        rating: rating,
-        image: image || ''
-    };
-    
-    // Add to current user's movies array
+
+    const newMovie = { title, year, director, genre, rating, image };
     movies.push(newMovie);
-    userMovies[currentUserIndex].push(newMovie);
-    
-    // Update display
+    userMovies[currentUserIndex] = movies;
+    saveMoviesToStorage();
     displayMovies();
     updateStats();
     hideAddMovieForm();
-    
-    // Show success message
-    showMessage(`"${title}" has been added to ${currentUser.name}'s collection!`);
+    showMessage(`"${title}" has been added!`);
 }
 
-// Delete movie
 function deleteMovie(index) {
-    if (currentUserIndex === null) return;
-    
-    if (confirm(`Are you sure you want to remove "${movies[index].title}" from ${currentUser.name}'s collection?`)) {
-        const removedMovie = movies.splice(index, 1)[0];
-        // Also remove from the main user movies array
-        const movieIndexInUserArray = userMovies[currentUserIndex].findIndex(
-            movie => movie.title === removedMovie.title && movie.year === removedMovie.year
-        );
-        if (movieIndexInUserArray > -1) {
-            userMovies[currentUserIndex].splice(movieIndexInUserArray, 1);
-        }
-        
+    if (confirm(`Delete "${movies[index].title}"?`)) {
+        movies.splice(index, 1);
+        userMovies[currentUserIndex] = movies;
+        saveMoviesToStorage();
         displayMovies();
         updateStats();
-        showMessage(`"${removedMovie.title}" has been removed from ${currentUser.name}'s collection.`);
     }
 }
 
-
-
-
-
-
-
-
-
-function getUserProfileInfo() {
-    if (!currentUser) return null;
-    
-    return {
-        ...currentUser,
-        totalMovies: movies.length,
-        averageRating: movies.length > 0 ? 
-            (movies.reduce((sum, movie) => sum + movie.rating, 0) / movies.length).toFixed(1) : 0,
-        favoriteGenre: favoriteGenre.textContent
-    };
+function showMessage(msg) {
+    alert(msg); // You can enhance with custom modal if desired.
 }
 
-
-
-
-// Handle form submission with Enter key
-document.addEventListener('DOMContentLoaded', function() {
-    const formInputs = ['movieTitle', 'movieYear', 'movieDirector', 'movieGenre', 'movieRating', 'movieImage'];
-    
-    formInputs.forEach(inputId => {
-        const input = document.getElementById(inputId);
-        if (input) {
-            input.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    addMovie();
-                }
-            });
-        }
+// Handle Enter key for form
+document.addEventListener('DOMContentLoaded', () => {
+    initializeApp();
+    const fields = ['movieTitle', 'movieYear', 'movieDirector', 'movieGenre', 'movieRating', 'movieImage'];
+    fields.forEach(id => {
+        const el = document.getElementById(id);
+        el?.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') addMovie();
+        });
     });
 });
-
-// Initialize the app when DOM is loaded
-document.addEventListener('DOMContentLoaded', initializeApp);
-
-
