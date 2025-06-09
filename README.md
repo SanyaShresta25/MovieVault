@@ -9,7 +9,8 @@ An interactive movie collection app for multiple users built with **HTML**, **CS
 
 ## 📸 Screenshot
 
-![Movie Gallery Screenshot](./screenshot.png)
+![Movie Gallery Screenshot](./images/screenshot0.png)
+![Movie Gallery Screenshot](./images/screensshot.png)
 
 ## 📐 Built With
 
